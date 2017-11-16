@@ -15,39 +15,8 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            SystemWindow testWindow = null;
-            SystemWindow lvWindow = null;
-
-            foreach (var window in SystemWindow.AllToplevelWindows)
-            {
-                if (window.Title == "Test AHK LV")
-                {
-                    testWindow = window;
-                    break;
-                }
-            }
-
-            if (testWindow == null)
-            {
-                Console.WriteLine("Test window not found");
-                return;
-            }
-
-            foreach (var window in testWindow.AllChildWindows)
-            {
-                if (window.PreviewContent.ComponentType == "DetailsListView")
-                {
-                    lvWindow = window;
-                    break;
-                }
-            }
-
-            if (lvWindow == null)
-            {
-                Console.WriteLine("ListView not found in Test window");
-                return;
-            }
-
+            var sw = MWAPIWrapper.GetWindowFromTitle("Test AHK LV");
+            var lvWindow = MWAPIWrapper.GetFirstLV(sw);
             var lv = SystemListView.FromSystemWindow(lvWindow);
 
             var rect = lv.ClientRect;
@@ -61,6 +30,9 @@ namespace TestApp
                 rect.Bottom = lv[i + 1].Position.Y;
                 var result = lvWindow.FillRect(rect, 0x0000FF);
             }
+
+            //var clv = new MWAPIWrapper.ColoredLV(lvWindow.HWnd);
+
         }
 
 
