@@ -1156,6 +1156,21 @@ namespace ManagedWinapi.Windows
             SendMessage(new HandleRef(this, HWnd), message, new IntPtr(value), new IntPtr(0));
         }
 
+        public RECT GetClientRect()
+        {
+            RECT r = new RECT();
+            GetClientRect(HWnd, out r);
+            return r;
+        }
+
+        public int FillRect(RECT r, uint c)
+        {
+            var dc = GetDC(HWnd);
+            //var hb = new System.Drawing.SolidBrush(Color.Blue);
+            var hb = CreateSolidBrush(c);
+            return FillRect(dc, ref r, hb);
+        }
+
         #region Equals and HashCode
 
         ///
@@ -1213,6 +1228,12 @@ namespace ManagedWinapi.Windows
         #endregion
 
         #region PInvoke Declarations
+
+        [DllImport("user32.dll")]
+        static extern int FillRect(IntPtr hDC, [In] ref RECT lprc, IntPtr hbr);
+
+        [DllImport("gdi32.dll")]
+        static extern IntPtr CreateSolidBrush(uint crColor);
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]

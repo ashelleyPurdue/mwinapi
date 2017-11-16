@@ -58,6 +58,29 @@ namespace ManagedWinapi.Windows
             }
         }
 
+        public RECT ClientRect
+        {
+            get
+            {
+                return sw.GetClientRect();
+            }
+        }
+
+        public int CountPerPage
+        {
+            get
+            {
+                return (int)SystemWindow.SendMessage(new HandleRef(sw, sw.HWnd), LVM_GETCOUNTPERPAGE, new IntPtr(0), new IntPtr(0));
+            }
+        }
+
+        public int TopIndex {
+            get
+            {
+                return (int)SystemWindow.SendMessage(new HandleRef(sw, sw.HWnd), LVM_GETTOPINDEX, new IntPtr(0), new IntPtr(0));
+            }
+        }
+
         /// <summary>
         /// The number of selected items (icons) in this list view.
         /// </summary>
@@ -217,7 +240,11 @@ namespace ManagedWinapi.Windows
             LVM_ENSUREVISIBLE = (0x1000 + 19),
             LVM_GETCOLUMN = (0x1000 + 25),
             LVM_SETITEMSTATE = (0x1000 + 43),
-            LVM_GETSELECTEDCOUNT = (0x1000 + 50);
+            LVM_GETSELECTEDCOUNT = (0x1000 + 50),
+            LVM_SETTEXTCOLOR = (0x1000 + 36),
+            LVM_SETTEXTBKCOLOR = (0x1000 + 38),
+            LVM_GETTOPINDEX = (0x1000 + 39),
+            LVM_GETCOUNTPERPAGE = (0x1000 + 40);
 
         private static readonly uint LVIF_TEXT = 0x1,
             LVIF_IMAGE = 0x2,
