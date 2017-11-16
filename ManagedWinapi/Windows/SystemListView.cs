@@ -40,7 +40,7 @@ namespace ManagedWinapi.Windows
             return new SystemListView(sw);
         }
 
-        readonly SystemWindow sw;
+        public readonly SystemWindow sw;
 
         private SystemListView(SystemWindow sw)
         {

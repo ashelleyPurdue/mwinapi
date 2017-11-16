@@ -7,6 +7,7 @@ Loop 200 {
 	LV_Add("", "Line " A_Index)
 }
 Gui, Show, w200, Test AHK LV
+Clipboard := hwnd
 return
 
 GuiClose:

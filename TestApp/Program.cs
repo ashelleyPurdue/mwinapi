@@ -1,5 +1,4 @@
-﻿using ManagedWinapi.Windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,26 +14,17 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            var sw = MWAPIWrapper.GetWindowFromTitle("Test AHK LV");
-            var lvWindow = MWAPIWrapper.GetFirstLV(sw);
-            var lv = SystemListView.FromSystemWindow(lvWindow);
+            // Get the HWND of the LV in the Test AHK script
+            var sw = MWAPIWrapper.Helpers.GetWindowFromTitle("Test AHK LV");
+            var lvWindow = MWAPIWrapper.Helpers.GetFirstLV(sw);
 
-            var rect = lv.ClientRect;
-            var iItems = lv.CountPerPage;
-            var iTop = lv.TopIndex;
+            // Test normal usage from AHK
 
-            var pt = lv[iTop].Position;
-            for (int i = iTop; i <= iTop + iItems; i++)
-            {
-                rect.Top = pt.Y;
-                rect.Bottom = lv[i + 1].Position.Y;
-                var result = lvWindow.FillRect(rect, 0x0000FF);
-            }
+            // Instantiate class on lv...
+            var clv = new MWAPIWrapper.ColoredLV(lvWindow.HWnd);
 
-            //var clv = new MWAPIWrapper.ColoredLV(lvWindow.HWnd);
-
+            // Set the row color
+            clv.SetRowColor(1, 0xFF0000);
         }
-
-
     }
 }
