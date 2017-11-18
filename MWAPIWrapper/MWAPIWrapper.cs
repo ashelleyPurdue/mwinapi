@@ -13,8 +13,9 @@ namespace MWAPIWrapper
         private SystemListView lv;
         private SystemWindow lvWindow;
 
-        public ColoredLV(IntPtr hwnd)
+        public void Add(string _hwnd)
         {
+            IntPtr hwnd = (IntPtr)Convert.ToInt32(_hwnd, 16);
             lvWindow = new SystemWindow(hwnd);
             lv = SystemListView.FromSystemWindow(lvWindow);
         }
