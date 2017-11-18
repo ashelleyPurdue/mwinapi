@@ -35,6 +35,7 @@ namespace MWAPIWrapper
             lvWindow.FillRect(rect, color);
         }
 
+        // Reference: https://stackoverflow.com/questions/2880160/listening-to-another-window-resize-events-in-c-sharp
         private static int MyHookCallback(int code, IntPtr wParam, IntPtr lParam, ref bool callNext)
         {
             if (code >= 0)
