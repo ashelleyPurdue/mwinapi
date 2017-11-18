@@ -1,6 +1,7 @@
 [Bb]in/
 [Oo]bj/
 
+*.dll
 *.db
 *.opendb
 
